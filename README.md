@@ -1,10 +1,10 @@
-****Cloud Ops API Gateway
+****Cloud Ops API Gateway****
 ****
 A FastAPI-based gateway in its early development stage for automating the management of cloud operations and infrastructure tasks, this is for personal practice with FastAPI and integration with other DevOps practices.
 
 **Current state:** it's a basic FastAPI app with a hello world endpoint with plans to become a hub for cloud operations integrated with AWS.
 
-****How to Run It Locally:
+****How to Run It Locally:****
 ****
 **Prerequisites:** Python 3.x required
 - Clone this repo
