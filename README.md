@@ -15,6 +15,6 @@ A FastAPI-based gateway in its early development stage for automating the manage
 - Run with uvicorn command: uvicorn main:app  --reload
 - What URL to visit to see it working: 127.0.0.1:8000, you can also go to /docs for additional api documentation and an interactive testing env.
 
-**Enviroment Setup:
-**- You will eventually need aws credentials
+**Enviroment Setup:**
+- You will eventually need aws credentials
 - .env file will be added later
