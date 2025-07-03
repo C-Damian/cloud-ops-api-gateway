@@ -17,4 +17,8 @@ A FastAPI-based gateway in its early development stage for automating the manage
 
 **Enviroment Setup:**
 - You will eventually need aws credentials
+<<<<<<< HEAD
 - .env file will be added later
+=======
+- add a .env file to secure your aws secret keys
+>>>>>>> 7f2523c (Added health endpoint and read me)
