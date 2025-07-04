@@ -1,6 +1,9 @@
 from fastapi import FastAPI
 import datetime
 from pydantic import BaseModel
+import boto3
+import json
+
 app = FastAPI()
 date = datetime.datetime.now()
 
@@ -22,3 +25,14 @@ def health():
     "version": "1.0.0",
     "timestamp": str(date)
 }
+
+@app.get("/invoke")
+def invoke():
+    client = boto3.client('lambda', region_name='us-east-1')
+    response = client.invoke(FunctionName='hello', InvocationType='RequestResponse')
+    
+    # Decode the response payload
+    payload = response['Payload'].read()
+    result = json.loads(payload)
+    
+    return result
