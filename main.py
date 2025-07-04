@@ -28,6 +28,7 @@ def health():
 
 @app.get("/invoke")
 def invoke():
+    # configure client and response according to the settigns and naming conventions you're using for your lambda function in aws.
     client = boto3.client('lambda', region_name='us-east-1')
     response = client.invoke(FunctionName='hello', InvocationType='RequestResponse')
     
