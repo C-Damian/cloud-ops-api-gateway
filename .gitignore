@@ -1,0 +1,19 @@
+# Virtual environment
+.venv/
+*.pyc
+__pycache__/
+
+# Environment variables
+.env
+
+# Editor/IDE specific files
+.vscode/
+.idea/
+
+# Other common ignore patterns
+*.log
+*.sqlite3
+*.db
+/htmlcov/
+.pytest_cache/
+.DS_Store
