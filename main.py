@@ -5,6 +5,7 @@ import boto3
 import json
 from auth import get_api_key
 from typing import Optional
+import time
 
 app = FastAPI()
 date = datetime.datetime.now()
@@ -47,7 +48,7 @@ async def call_lambda(age: int, api_key: str = Depends(get_api_key)):
     payload = {"age": age}
 
     response = client.invoke(
-       FunctionName='hello', 
+       FunctionName='AgeFunction', 
        InvocationType='RequestResponse',
        Payload=json.dumps(payload)
        )
@@ -78,11 +79,30 @@ async def send_message(message_data: SQSMessage, api_key: str = Depends(get_api_
 
 @app.get("/API/Logs")
 async def cloud_watch(
-  logGroupName: str,
+  logGroupName: str = "/aws/lambda/AgeFunction", #Default test function
+  hours_back: int = 24, #default to last 24hrs
+  limit: int = 100, #default limit of records
+  nextToken: Optional[str] = None,
   api_key: str = Depends(get_api_key)
   ):
   # Create cloudwatch client
   client = boto3.client('logs', region_name='us-east-1')
-  # Get logs
-  response = client.filter_log_events(logGroupName=logGroupName)
+
+  # Calculate time range
+  end_time = int(time.time() * 1000)
+  start_time = end_time - (hours_back * 60 * 60 * 1000)
+
+  # Start with base parameters
+  params = {
+      'logGroupName': logGroupName,
+      'startTime': start_time,
+      'endTime': end_time,
+      'limit': limit
+  }
+  # Conditionally add nextToken if it exists
+  if nextToken:
+      params['nextToken'] = nextToken  # Adds new key-value pair
+
+  # Get logs, using query paramms to indicate which logs group to pull
+  response = client.filter_log_events(**params)
   return response
