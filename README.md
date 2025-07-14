@@ -10,7 +10,7 @@ A FastAPI-based gateway for automating cloud operations and infrastructure manag
 - **Interactive Documentation**: Auto-generated OpenAPI docs at `/docs`
 
 ### AWS Integrations
-- **Lambda Functions**: Invoke AWS Lambda with parameters (`/API/lambda/{age}`)
+- **Lambda Function(Small app wtih logic to check age passed)**: Invoke AWS Lambda with parameters (`/API/lambda/{age}`)
 - **SQS Messaging**: Send messages to queues (`/API/SQS/send-message-to-sqs`)
 - **CloudWatch Logs**: Query and filter log events (`/API/Logs`)
 

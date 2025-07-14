@@ -9,6 +9,10 @@ __pycache__/
 # Editor/IDE specific files
 .vscode/
 .idea/
+./terraform/*.tfstate
+./terraform/*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
 
 # Other common ignore patterns
 *.log

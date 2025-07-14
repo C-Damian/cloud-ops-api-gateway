@@ -7,6 +7,7 @@ from auth import get_api_key
 from typing import Optional
 import time
 
+
 app = FastAPI()
 date = datetime.datetime.now()
 
@@ -79,7 +80,7 @@ async def send_message(message_data: SQSMessage, api_key: str = Depends(get_api_
 
 @app.get("/API/Logs")
 async def cloud_watch(
-  logGroupName: str = "/aws/lambda/AgeFunction", #Default test function
+  logGroupName: str = "/aws/lambda/AgeFunctions", #Default test function
   hours_back: int = 24, #default to last 24hrs
   limit: int = 100, #default limit of records
   nextToken: Optional[str] = None,
@@ -106,3 +107,7 @@ async def cloud_watch(
   # Get logs, using query paramms to indicate which logs group to pull
   response = client.filter_log_events(**params)
   return response
+
+from mangum import Mangum
+
+handler = Mangum(app) #handler for AWS Lambda
