@@ -26,7 +26,8 @@ A FastAPI-based gateway for automating cloud operations and infrastructure manag
 cloud-ops-api-gateway/
 ├── main.py              # FastAPI application and endpoints
 ├── auth.py              # Authentication logic
-├── requirements.txt     # Python dependencies
+├── requirements.txt     # Python dependencies for local deployment
+├── lambda_reqs.txt      # Python dependencies for lambda function
 ├── .env                 # Environment variables (create this)
 ├── .gitignore          # Git ignore patterns
 └── README.md           # This file
