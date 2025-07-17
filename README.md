@@ -65,7 +65,7 @@ cloud-ops-api-gateway/
    ```
 
 4. **Environment Configuration**
-   Create a `.env` file in the project root:
+   Create a `.env` file in the project root when running locally:
    ```env
    API_KEY=your-secret-api-key-here
    AWS_ACCESS_KEY_ID=your-aws-access-key
@@ -73,9 +73,13 @@ cloud-ops-api-gateway/
    AWS_DEFAULT_REGION=us-east-1
    ```
 
-5. **Run the application**
+5. **Run the application locally**
    ```bash
    uvicorn main:app --reload
+   ```
+   **Deploy Application in AWS with Terraform files**
+   ```bash
+   terraform apply -var="api_key=your-key" #This ensures you set your API key variable when deploying from TF, if running locally you can set your own .env file and source from that as explained in earlier steps.
    ```
 
 6. **Access the API**

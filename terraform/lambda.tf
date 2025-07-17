@@ -64,6 +64,14 @@ resource "null_resource" "lambda_package" {
     working_dir = path.module
   }
 }
+
+# Terraform/variables.tf to help us set env variables for Lambda
+variable "api_key" {
+  description = "API key for authenticated requests"
+  type        = string
+  sensitive   = true
+}
+
 # The actual Lambda function
 resource "aws_lambda_function" "fastapi_lambda" {
   depends_on = [null_resource.lambda_package] # Ensure package is built first
@@ -73,5 +81,12 @@ resource "aws_lambda_function" "fastapi_lambda" {
   handler = "main.handler" # Points to our handler in main.py
   runtime = "python3.11"
   timeout = 30
+
+  environment {
+    variables = {
+      API_KEY = var.api_key # Set from Terraform variable
+      ENVIROMENT = "production"
+    }
+  }
   
 }
