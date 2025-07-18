@@ -9,16 +9,36 @@ resource "aws_iam_role" "lambda_role" {
         Principal = {
           Service = "lambda.amazonaws.com"
         }
-      },
+      }
     ]
   })
-  
 }
 
 # Attach basic Lambda execution policy
 resource "aws_iam_role_policy_attachment" "lambda_basic" {
   role       = aws_iam_role.lambda_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
+resource "aws_iam_role_policy" "lambda_invoke_all" {
+  name = "AdditionalPermissions"
+  role = aws_iam_role.lambda_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = "lambda:InvokeFunction"
+        Resource = "arn:aws:lambda:us-east-1:992382714131:function:*"
+      },
+      {
+			"Action": "sqs:sendmessage",
+			"Effect": "Allow",
+			"Resource": "arn:aws:sqs:us-east-1:992382714131:fastapi-test-queue"
+		  }
+    ]
+  })
 }
 
 # Create a ZIP of your code
