@@ -283,6 +283,3 @@ This project demonstrates:
 
 This is a personal learning project, but suggestions and improvements are welcome! Feel free to open issues or submit pull requests.
 
-## 📄 License
-
-This project is for educational purposes. Feel free to use and modify as needed for your own learning.
