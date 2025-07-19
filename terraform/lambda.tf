@@ -108,5 +108,4 @@ resource "aws_lambda_function" "fastapi_lambda" {
       ENVIROMENT = "production"
     }
   }
-  
 }
