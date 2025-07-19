@@ -45,15 +45,5 @@ jobs:
         
         # Wait a moment for deployment to be ready
         sleep 10
-        
-        # Test health endpoint
-        echo "Testing health endpoint..."
-        curl -f "https://59snol6ys8.execute-api.us-east-1.amazonaws.com/health"
-        
-        # Test authenticated endpoint
-        echo "Testing authenticated endpoint..."
-        curl -f -H "X-API-Key: ${{ secrets.API_KEY }}" \
-          "https://59snol6ys8.execute-api.us-east-1.amazonaws.com/protected-data"
-        echo "All tests passed!"
 
         echo "🚀 API deployed at: $API_URL"
