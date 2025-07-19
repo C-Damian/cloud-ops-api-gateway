@@ -52,4 +52,16 @@ jobs:
           "$API_URL/API/lambda/25"
 
 
-        echo "🚀 API deployed at: $API_URL"
+         # Send deployment notification to SQS
+        SQS_RESPONSE=$(curl -s -H "X-API-Key: ${{ secrets.API_KEY }}" \
+          -H "Content-Type: application/json" \
+          -d "{\"message\": \"🚀 GitHub Actions deployment successful\", \"api_url\": \"$API_URL\", \"timestamp\": \"$(date -u)\"}" \
+          "$API_URL/API/SQS/send-message-to-sqs")
+        
+        if [[ "$SQS_RESPONSE" == *"success"* ]] || [[ "$SQS_RESPONSE" == *"sent"* ]]; then
+          echo "✅ Deployment notification sent to SQS successfully"
+        else
+          echo "⚠️ SQS notification may have failed, but deployment completed"
+        fi
+        
+        echo "🎉 Deployment completed - API URL sent to SQS queue"
