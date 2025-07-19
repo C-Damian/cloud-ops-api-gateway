@@ -45,5 +45,11 @@ jobs:
         
         # Wait a moment for deployment to be ready
         sleep 10
+        
+        # Test authenticated endpoint
+        echo "Testing authenticated endpoint..."
+        curl -f -H "X-API-Key: ${{ secrets.API_KEY }}" \
+          "$API_URL/API/lambda/25"
+
 
         echo "🚀 API deployed at: $API_URL"
