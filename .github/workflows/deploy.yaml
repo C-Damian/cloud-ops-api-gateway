@@ -28,16 +28,15 @@ jobs:
         
     - name: Terraform Init
       working-directory: ./terraform
-      run: terraform init
+      run: |
+            terraform init
+            terraform import aws_lambda_function.fastapi_lambda fastapi-lambda
+            terraform import aws_apigatewayv2_api.fastapi_gateway your-api-id
       
     - name: Terraform Plan
       working-directory: ./terraform
       run: terraform plan -var="api_key=${{ secrets.API_KEY }}"
       
-    terraform import aws_lambda_function.fastapi_lambda fastapi-lambda
-    terraform import aws_apigatewayv2_api.fastapi_gateway your-api-id
-
-
     - name: Terraform Apply
       working-directory: ./terraform
       run: terraform apply -auto-approve -var="api_key=${{ secrets.API_KEY }}"
@@ -49,7 +48,7 @@ jobs:
         
         # Wait a moment for deployment to be ready
         sleep 10
-
+        
         # Test authenticated endpoint
         echo "Testing authenticated endpoint..."
         curl -f -H "X-API-Key: ${{ secrets.API_KEY }}" \
