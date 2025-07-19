@@ -41,7 +41,7 @@ jobs:
     - name: Output API URL
       working-directory: ./terraform
       run: |
-        API_URL=$(terraform console <<< "local.api_gateway_url" 2>/dev/null)
+        API_URL=$(terraform output -raw api_gateway_url 2>/dev/null)
         
         # Wait a moment for deployment to be ready
         sleep 10
