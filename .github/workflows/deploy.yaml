@@ -38,7 +38,7 @@ jobs:
       working-directory: ./terraform
       run: terraform apply -auto-approve -var="api_key=${{ secrets.API_KEY }}"
       
-    - name: Output API URL
+    - name: Test API and Send API URL
       working-directory: ./terraform
       run: |
         API_URL=$(terraform output -raw api_gateway_url 2>/dev/null)
@@ -52,10 +52,10 @@ jobs:
           "$API_URL/API/lambda/25"
 
 
-         # Send deployment notification to SQS
+        # Send deployment notification to SQS
         SQS_RESPONSE=$(curl -s -H "X-API-Key: ${{ secrets.API_KEY }}" \
           -H "Content-Type: application/json" \
-          -d "{\"message\": \"🚀 GitHub Actions deployment successful\", \"api_url\": \"$API_URL\", \"timestamp\": \"$(date -u)\"}" \
+          -d "{\"message\": \"🚀 GitHub Actions deployment successful | API URL: $API_URL | Deployed at: $(date -u)\"}" \
           "$API_URL/API/SQS/send-message-to-sqs")
         
         if [[ "$SQS_RESPONSE" == *"success"* ]] || [[ "$SQS_RESPONSE" == *"sent"* ]]; then
