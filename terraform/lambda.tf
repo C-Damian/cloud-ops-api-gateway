@@ -110,3 +110,7 @@ resource "aws_lambda_function" "fastapi_lambda" {
   }
   
 }
+
+locals {
+  api_gateway_url = aws_apigatewayv2_api.fastapi_gateway.api_endpoint
+}

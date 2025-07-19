@@ -38,12 +38,10 @@ jobs:
       working-directory: ./terraform
       run: terraform apply -auto-approve -var="api_key=${{ secrets.API_KEY }}"
       
-    - name: Set API URL and Test Endpoints
+    - name: Output API URL
       working-directory: ./terraform
       run: |
-        API_URL=$(terraform show -json | jq -r '.values.root_module.resources[] | select(.address=="aws_apigatewayv2_api.fastapi_gateway") | .values.api_endpoint')
-
-
+        API_URL=$(terraform console <<< "local.api_gateway_url") 2>/dev/null
         
         # Wait a moment for deployment to be ready
         sleep 10
