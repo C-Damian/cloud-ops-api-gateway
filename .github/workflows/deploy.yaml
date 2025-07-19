@@ -30,10 +30,6 @@ jobs:
       working-directory: ./terraform
       run: terraform init
       
-    - name: Terraform Destroy
-      working-directory: ./terraform
-      run: terraform destroy
-      
     - name: Terraform Plan
       working-directory: ./terraform
       run: terraform plan -var="api_key=${{ secrets.API_KEY }}"
