@@ -28,14 +28,14 @@ jobs:
         
     - name: Terraform Init
       working-directory: ./terraform
-      run: |
-            terraform init
-            terraform import aws_lambda_function.fastapi_lambda fastapi-lambda
-            terraform import aws_apigatewayv2_api.fastapi_gateway your-api-id
+      run: terraform init
       
     - name: Terraform Plan
       working-directory: ./terraform
-      run: terraform plan -var="api_key=${{ secrets.API_KEY }}"
+      run: |
+          terraform plan -var="api_key=${{ secrets.API_KEY }}"
+          terraform import aws_apigatewayv2_api.fastapi_gateway your-api-id
+          terraform import aws_lambda_function.fastapi_lambda fastapi-lambda
       
     - name: Terraform Apply
       working-directory: ./terraform
