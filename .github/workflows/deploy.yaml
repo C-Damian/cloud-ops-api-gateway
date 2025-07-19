@@ -36,7 +36,7 @@ jobs:
       
     - name: Terraform Apply
       working-directory: ./terraform
-      run: terraform apply -auto-approve -var="api_key=${{ secrets.API_KEY }}"
+      run: terraform apply -auto-approve -var="api_key=${{ secrets.API_KEY }}" > /dev/null 2>&1
       
     - name: Test API and Send API URL
       working-directory: ./terraform
