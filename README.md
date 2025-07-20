@@ -2,6 +2,9 @@
 
 A FastAPI-based gateway for automating cloud operations and infrastructure management tasks. This project serves as a learning platform for FastAPI development, AWS service integration, and Infrastructure as Code (IaC) with Terraform.
 
+[![Demo](https://youtu.be/CeB2i8V0O9c.png)](https://youtu.be/CeB2i8V0O9c)
+
+
 ## 🚀 Current Features
 
 ### Core API
