@@ -64,4 +64,5 @@ jobs:
           echo "⚠️ SQS notification may have failed, but deployment completed"
         fi
         
+        
         echo "🎉 Deployment completed! - API URL sent to SQS queue"
