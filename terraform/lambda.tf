@@ -30,12 +30,12 @@ resource "aws_iam_role_policy" "lambda_invoke_all" {
       {
         Effect = "Allow"
         Action = "lambda:InvokeFunction"
-        Resource = "arn:aws:lambda:us-east-1:992382714131:function:*"
+        Resource = "arn:aws:lambda:us-east-1:YOURARN:function:*"
       },
       {
 			"Action": "sqs:sendmessage",
 			"Effect": "Allow",
-			"Resource": "arn:aws:sqs:us-east-1:992382714131:fastapi-test-queue"
+			"Resource": "arn:aws:sqs:us-east-1:YOURARN:fastapi-test-queue"
 		  }
     ]
   })

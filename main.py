@@ -67,7 +67,7 @@ async def send_message(message_data: SQSMessage, api_key: str = Depends(get_api_
     
     # Send message to your specific queue
     response = client.send_message(
-        QueueUrl='https://sqs.us-east-1.amazonaws.com/992382714131/fastapi-test-queue',
+        QueueUrl='yoursqslink',  # Replace with your actual SQS queue URL
         MessageBody=message_data.message
     )
     
